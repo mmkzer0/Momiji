@@ -1,0 +1,17 @@
+[package]
+name = "momiji_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+sha2 = "0.10"
+hex = "0.4"
+uniffi = "0.28"
+
+[build-dependencies]
+uniffi = { version = "0.28", features = ["build"] }
+
+
