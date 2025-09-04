@@ -25,7 +25,7 @@ struct MomijiApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LibraryView()
         }
         .modelContainer(sharedModelContainer)
     }

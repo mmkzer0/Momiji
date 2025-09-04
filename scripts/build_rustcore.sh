@@ -12,7 +12,8 @@ cargo build --lib --release --target aarch64-apple-ios-sim
 
 # generate Swift bindings (UniFFI) and XCFramework
 # have to specify --features=uniffi/cli and call via cargo
-cargo run --features=uniffi/cli --release --bin uniffi-bindgen generate src/momiji_core.udl --language swift --out-dir ./Generated
+# cargo run --features=uniffi/cli --release --bin uniffi-bindgen generate src/momiji_core.udl --language swift --out-dir ./Generated
+cargo run --features=uniffi/cli --release --bin uniffi-bindgen generate --library target/aarch64-apple-ios/release/libmomiji_core.a --language swift --out-dir ./Generated
 
 # prepare a headers dir that contains the header + *module.modulemap*
 GEN=./Generated
@@ -21,6 +22,8 @@ rm -rf "$HEADERS_DIR"
 mkdir -p "$HEADERS_DIR"
 
 cp -rf "$GEN/momiji_coreFFI.h" "$HEADERS_DIR/"
+
+cp -rf "$GEN/momiji_core.swift" "../app/Momiji/Momiji/momiji_core.swift"
 
 # UniFFI writes "momiji_coreFFI.modulemap"; Xcode expects the file name "module.modulemap"
 # Create/rename it accordingly:

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8F70CD082E69A8AC00023670 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 8F70CD072E69A8AC00023670 /* ZIPFoundation */; };
-		8F70CD172E69BA5900023670 /* MomijiCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F70CD152E69BA1000023670 /* MomijiCore.xcframework */; };
-		8F70CD182E69BA5900023670 /* MomijiCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F70CD152E69BA1000023670 /* MomijiCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,20 +26,6 @@
 			remoteInfo = Momiji;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		8F70CCFC2E69A63600023670 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				8F70CD182E69BA5900023670 /* MomijiCore.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8F104D302E68E84800EB3B84 /* Momiji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momiji.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +58,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F70CD082E69A8AC00023670 /* ZIPFoundation in Frameworks */,
-				8F70CD172E69BA5900023670 /* MomijiCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +117,6 @@
 				8F104D2C2E68E84800EB3B84 /* Sources */,
 				8F104D2D2E68E84800EB3B84 /* Frameworks */,
 				8F104D2E2E68E84800EB3B84 /* Resources */,
-				8F70CCFC2E69A63600023670 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -442,7 +424,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,7 +457,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
