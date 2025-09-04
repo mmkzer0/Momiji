@@ -9,9 +9,12 @@ crate-type = ["staticlib"]
 [dependencies]
 sha2 = "0.10"
 hex = "0.4"
-uniffi = "0.28"
+uniffi = { version = "0.28", features = ["cli"] }
 
 [build-dependencies]
 uniffi = { version = "0.28", features = ["build"] }
 
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/uniffi-bindgen.rs"
 

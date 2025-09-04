@@ -1,4 +1,4 @@
-namespace momiji.core {
+namespace momiji_core {
     string sha256_file(string path);
-}
+};
 
