@@ -37,12 +37,16 @@ struct LibraryView: View {
                 }
             }
         } detail: {
-            if let w = selectedWork, let reader = try? ZipOrFolderReader(url: w.url) {
-                ReaderView(reader: reader, title: w.url.lastPathComponent)
-            } else {
-                ContentUnavailableView("Select a work", systemImage: "books.vertical")
-            }
+            if let w = selectedWork { ReaderHost(work: w) }
+            else { ContentUnavailableView("Select a work", systemImage: "books.vertical") }
         }
+
+        .task {
+            if works.isEmpty { works = LibraryStore.shared.load() }
+        }
+        .onChange(of: works) { LibraryStore.shared.save(works) }
+        // auto-save on any change
+
     }
 
     @MainActor

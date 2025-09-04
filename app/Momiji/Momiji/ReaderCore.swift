@@ -28,29 +28,22 @@ struct ZipOrFolderReader: ArchiveReader {
     private let impl: Impl
 
     init(url: URL) throws {
-        if ["zip","cbz"].contains(url.pathExtension.lowercased()) {
+        let ext = url.pathExtension.lowercased()
+        if ext == "zip" || ext == "cbz" {
             self.impl = .zip(try ZipArchiveReader(url: url))
         } else {
             self.impl = .folder(FolderReader(url: url))
         }
     }
+
     var pageCount: Int {
-        switch impl {
-        case .zip(let z): return z.pageCount
-        case .folder(let f): return f.pageCount
-        }
+        switch impl { case .zip(let z): z.pageCount; case .folder(let f): f.pageCount }
     }
     func pageName(at i: Int) -> String {
-        switch impl {
-        case .zip(let z): return z.pageName(at: i)
-        case .folder(let f): return f.pageName(at: i)
-        }
+        switch impl { case .zip(let z): z.pageName(at: i); case .folder(let f): f.pageName(at: i) }
     }
     func page(at i: Int) throws -> Data {
-        switch impl {
-        case .zip(let z): return try z.page(at: i)
-        case .folder(let f): return try f.page(at: i)
-        }
+        switch impl { case .zip(let z): try z.page(at: i); case .folder(let f): try f.page(at: i) }
     }
 }
 
@@ -59,19 +52,18 @@ final class ZipArchiveReader: ArchiveReader {
     private let entries: [Entry]
 
     init(url: URL) throws {
-        guard let a = Archive(url: url, accessMode: .read) else {
-            throw NSError(domain: "zip", code: 1)
-        }
+        let a = try Archive(url: url, accessMode: .read)
         self.archive = a
         self.entries = a.compactMap { $0 }
-            .filter { $0.type == .file && isSupportedImagePath($0.path) }
+            .filter { $0.type == .file && $0.path.lowercased().hasSuffix(anyOf: [".jpg",".jpeg",".png",".webp",".bmp"]) }
             .sorted { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
     }
+
     var pageCount: Int { entries.count }
     func pageName(at index: Int) -> String { entries[index].path }
     func page(at index: Int) throws -> Data {
         var data = Data()
-        try archive.extract(entries[index]) { data.append($0) }
+        _ = try archive.extract(entries[index]) { data.append($0) }
         return data
     }
 }
@@ -82,7 +74,7 @@ struct FolderReader: ArchiveReader {
         let fm = FileManager.default
         let items = (try? fm.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)) ?? []
         self.files = items
-            .filter { supportedImageExtensions.contains($0.pathExtension.lowercased()) }
+            .filter { ["jpg","jpeg","png","webp","bmp"].contains($0.pathExtension.lowercased()) }
             .sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
     }
     var pageCount: Int { files.count }
@@ -121,4 +113,8 @@ func sha256(url: URL) throws -> String {
     }
 
     return hasher.finalize().map { String(format: "%02x", $0) }.joined()
+}
+
+private extension String {
+    func hasSuffix(anyOf exts: [String]) -> Bool { exts.contains { self.hasSuffix($0) } }
 }

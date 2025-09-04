@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ReaderView: View {
-    let reader: ArchiveReader
+    let reader: any ArchiveReader
     let title: String
     @State private var index = 0
 
     var body: some View {
         TabView(selection: $index) {
             ForEach(0..<reader.pageCount, id: \.self) { i in
-                PageImage(reader: reader, index: i).tag(i).ignoresSafeArea()
+                PageImage(reader: reader, index: i)
+                    .tag(i)
+                    .ignoresSafeArea()
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .automatic))
@@ -25,7 +27,7 @@ struct ReaderView: View {
 }
 
 private struct PageImage: View {
-    let reader: ArchiveReader
+    let reader: any ArchiveReader
     let index: Int
     @State private var image: UIImage?
 
@@ -35,7 +37,8 @@ private struct PageImage: View {
             else { ProgressView() }
         }
         .task {
-            if image == nil, let data = try? reader.page(at: index), let ui = UIImage(data: data) {
+            if image == nil, let data = try? reader.page(at: index),
+               let ui = UIImage(data: data) {
                 image = ui
             }
         }

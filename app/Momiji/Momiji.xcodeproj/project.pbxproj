@@ -34,9 +34,22 @@
 		8F70CD152E69BA1000023670 /* MomijiCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MomijiCore.xcframework; path = /Users/lennartk/Documents/momiji/rustcore/MomijiCore.xcframework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8F70CD282E6A14E100023670 /* Exceptions for "Momiji" folder in "Momiji" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8F104D2F2E68E84800EB3B84 /* Momiji */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8F104D322E68E84800EB3B84 /* Momiji */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F70CD282E6A14E100023670 /* Exceptions for "Momiji" folder in "Momiji" target */,
+			);
 			path = Momiji;
 			sourceTree = "<group>";
 		};
@@ -419,6 +432,7 @@
 				DEVELOPMENT_TEAM = C8W23KG626;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Momiji/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -452,6 +466,7 @@
 				DEVELOPMENT_TEAM = C8W23KG626;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Momiji/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
