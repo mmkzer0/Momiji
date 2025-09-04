@@ -9,7 +9,7 @@ crate-type = ["staticlib"]
 [dependencies]
 sha2 = "0.10"
 hex = "0.4"
-uniffi = { version = "0.28", features = ["cli"] }
+uniffi = "0.28"
 
 [build-dependencies]
 uniffi = { version = "0.28", features = ["build"] }

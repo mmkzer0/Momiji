@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8F70CD082E69A8AC00023670 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 8F70CD072E69A8AC00023670 /* ZIPFoundation */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8F104D402E68E84A00EB3B84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -23,15 +27,44 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8F70CCFC2E69A63600023670 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8F104D302E68E84800EB3B84 /* Momiji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momiji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F104D3F2E68E84A00EB3B84 /* MomijiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomijiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F104D492E68E84A00EB3B84 /* MomijiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomijiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		8F70CD012E69A81100023670 /* Exceptions for "Momiji" folder in "Embed Frameworks" phase from "Momiji" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			attributesByRelativePath = {
+				/Users/lennartk/Documents/momiji/app/Momiji/Momiji/MomijiCore.xcframework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+			};
+			buildPhase = 8F70CCFC2E69A63600023670 /* Embed Frameworks */;
+			membershipExceptions = (
+				/Users/lennartk/Documents/momiji/app/Momiji/Momiji/MomijiCore.xcframework,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8F104D322E68E84800EB3B84 /* Momiji */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F70CD012E69A81100023670 /* Exceptions for "Momiji" folder in "Embed Frameworks" phase from "Momiji" target */,
+			);
 			path = Momiji;
 			sourceTree = "<group>";
 		};
@@ -52,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F70CD082E69A8AC00023670 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +112,7 @@
 				8F104D322E68E84800EB3B84 /* Momiji */,
 				8F104D422E68E84A00EB3B84 /* MomijiTests */,
 				8F104D4C2E68E84A00EB3B84 /* MomijiUITests */,
+				8F70CD062E69A8AC00023670 /* Frameworks */,
 				8F104D312E68E84800EB3B84 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +127,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8F70CD062E69A8AC00023670 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,6 +144,7 @@
 				8F104D2C2E68E84800EB3B84 /* Sources */,
 				8F104D2D2E68E84800EB3B84 /* Frameworks */,
 				8F104D2E2E68E84800EB3B84 /* Resources */,
+				8F70CCFC2E69A63600023670 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -112,6 +155,7 @@
 			);
 			name = Momiji;
 			packageProductDependencies = (
+				8F70CD072E69A8AC00023670 /* ZIPFoundation */,
 			);
 			productName = Momiji;
 			productReference = 8F104D302E68E84800EB3B84 /* Momiji.app */;
@@ -195,6 +239,9 @@
 			);
 			mainGroup = 8F104D272E68E84800EB3B84;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8F70CD022E69A85C00023670 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8F104D312E68E84800EB3B84 /* Products */;
 			projectDirPath = "";
@@ -405,12 +452,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Reaven.Momiji;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.reaven.momiji;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -437,12 +485,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Reaven.Momiji;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.reaven.momiji;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -578,6 +627,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8F70CD022E69A85C00023670 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.19;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8F70CD072E69A8AC00023670 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F70CD022E69A85C00023670 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8F104D282E68E84800EB3B84 /* Project object */;
 }
