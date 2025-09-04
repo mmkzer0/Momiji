@@ -1,4 +1,15 @@
-namespace momiji_core {
-    string sha256_file(string path);
+[Error]
+enum MomijiError {
+    "Io",
+    "NotFound",
+    "PermissionDenied",
+    "Unknown",
 };
+
+namespace momijicore {
+    [Throws=MomijiError]
+    string sha256_file(string path);
+    string ping();
+};
+
 

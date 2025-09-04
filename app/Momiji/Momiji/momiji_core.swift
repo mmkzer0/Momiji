@@ -436,6 +436,13 @@ private struct FfiConverterString: FfiConverter {
     }
 }
 
+public func ping() -> String {
+    return try! FfiConverterString.lift(try! rustCall {
+        uniffi_momiji_core_fn_func_ping($0
+        )
+    })
+}
+
 public func sha256File(path: String) -> String {
     return try! FfiConverterString.lift(try! rustCall {
         uniffi_momiji_core_fn_func_sha256_file(
@@ -459,6 +466,9 @@ private var initializationResult: InitializationResult = {
     let scaffolding_contract_version = ffi_momiji_core_uniffi_contract_version()
     if bindings_contract_version != scaffolding_contract_version {
         return InitializationResult.contractVersionMismatch
+    }
+    if uniffi_momiji_core_checksum_func_ping() != 49831 {
+        return InitializationResult.apiChecksumMismatch
     }
     if uniffi_momiji_core_checksum_func_sha256_file() != 58747 {
         return InitializationResult.apiChecksumMismatch
