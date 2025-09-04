@@ -10,6 +10,7 @@ import Foundation
 struct WorkRecord : Codable {
     let filename: String
     let hash: String
+    let pageCount: Int?
 }
 
 final class LibraryStore {
@@ -41,14 +42,14 @@ final class LibraryStore {
         return recs.compactMap { r in
             let url = libDir.appendingPathComponent(r.filename)
             guard fm.fileExists(atPath: url.path) else { return nil }
-            return Work(url: url, hash: r.hash.isEmpty ? nil : r.hash)
+            return Work(url: url, hash: r.hash.isEmpty ? nil : r.hash, pageCount: r.pageCount)
         }
     }
     
     func save(_ works: [Work]) {
         let recs = works.map {
             WorkRecord(filename: $0.url.lastPathComponent,
-                       hash: $0.hash ?? "")
+                       hash: $0.hash ?? "", pageCount: $0.pageCount)
             }
                 if let data = try? JSONEncoder().encode(recs) {
                     try? data.write(to: dbURL, options: .atomic)

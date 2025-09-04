@@ -8,8 +8,9 @@
 import Foundation
 import SwiftData
 
-struct Work: Identifiable, Hashable {
+struct Work: Identifiable, Hashable, Codable {
     let id: UUID = .init()
     let url: URL
     var hash: String?
+    var pageCount: Int?
 }

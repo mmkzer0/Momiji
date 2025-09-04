@@ -34,9 +34,11 @@ struct ReaderHost: View {
     @MainActor
     private func load() {
         do {
+            print("Opening:", work.url.path) // debug
             reader = try ZipOrFolderReader(url: work.url)
         } catch {
             self.error = error.localizedDescription
+            print("Reader open failed:", error)
         }
     }
     

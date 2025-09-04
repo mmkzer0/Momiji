@@ -52,11 +52,30 @@ final class ZipArchiveReader: ArchiveReader {
     private let entries: [Entry]
 
     init(url: URL) throws {
-        let a = try Archive(url: url, accessMode: .read)
-        self.archive = a
-        self.entries = a.compactMap { $0 }
-            .filter { $0.type == .file && $0.path.lowercased().hasSuffix(anyOf: [".jpg",".jpeg",".png",".webp",".bmp"]) }
+        // Try URL-mapped archive first using the throwing initializer
+        do {
+            let a = try Archive(url: url, accessMode: .read)
+            self.archive = a
+        } catch {
+            // Fallback: load into memory (some zips trip the mmap path)
+            let data = try Data(contentsOf: url)
+            do {
+                self.archive = try Archive(data: data, accessMode: .read)
+            } catch {
+                throw NSError(domain: "zip", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid or unsupported ZIP"])
+            }
+        }
+
+        let exts = [".jpg",".jpeg",".png",".webp",".bmp",".gif"]
+        self.entries = archive
+            .compactMap { $0 }
+            .filter { $0.type == .file && $0.path.lowercased().hasSuffix(anyOf: exts) }
             .sorted { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
+
+        if entries.isEmpty {
+            // Make emptiness explicit so we see it in the UI
+            throw NSError(domain: "zip", code: 2, userInfo: [NSLocalizedDescriptionKey: "No images found in archive"])
+        }
     }
 
     var pageCount: Int { entries.count }
@@ -67,6 +86,7 @@ final class ZipArchiveReader: ArchiveReader {
         return data
     }
 }
+
 
 struct FolderReader: ArchiveReader {
     private let files: [URL]
