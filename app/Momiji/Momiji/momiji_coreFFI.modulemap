@@ -1,4 +1,0 @@
-module momiji_coreFFI {
-    header "momiji_coreFFI.h"
-    export *
-}

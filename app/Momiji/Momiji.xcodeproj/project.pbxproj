@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8F70CD082E69A8AC00023670 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 8F70CD072E69A8AC00023670 /* ZIPFoundation */; };
+		8F70CD172E69BA5900023670 /* MomijiCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F70CD152E69BA1000023670 /* MomijiCore.xcframework */; };
+		8F70CD182E69BA5900023670 /* MomijiCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8F70CD152E69BA1000023670 /* MomijiCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8F70CD182E69BA5900023670 /* MomijiCore.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,27 +47,12 @@
 		8F104D302E68E84800EB3B84 /* Momiji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momiji.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F104D3F2E68E84A00EB3B84 /* MomijiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomijiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F104D492E68E84A00EB3B84 /* MomijiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomijiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F70CD152E69BA1000023670 /* MomijiCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MomijiCore.xcframework; path = /Users/lennartk/Documents/momiji/rustcore/MomijiCore.xcframework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		8F70CD012E69A81100023670 /* Exceptions for "Momiji" folder in "Embed Frameworks" phase from "Momiji" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			attributesByRelativePath = {
-				/Users/lennartk/Documents/momiji/app/Momiji/Momiji/MomijiCore.xcframework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
-			};
-			buildPhase = 8F70CCFC2E69A63600023670 /* Embed Frameworks */;
-			membershipExceptions = (
-				/Users/lennartk/Documents/momiji/app/Momiji/Momiji/MomijiCore.xcframework,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8F104D322E68E84800EB3B84 /* Momiji */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8F70CD012E69A81100023670 /* Exceptions for "Momiji" folder in "Embed Frameworks" phase from "Momiji" target */,
-			);
 			path = Momiji;
 			sourceTree = "<group>";
 		};
@@ -86,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F70CD082E69A8AC00023670 /* ZIPFoundation in Frameworks */,
+				8F70CD172E69BA5900023670 /* MomijiCore.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +119,7 @@
 		8F70CD062E69A8AC00023670 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F70CD152E69BA1000023670 /* MomijiCore.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
