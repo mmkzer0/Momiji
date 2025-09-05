@@ -25,9 +25,9 @@ struct ReaderCoreTests {
     }
 
     @Test func testLibraryStoreRoundtrip() async throws {
-        let store = LibraryStore()
+        let store = await LibraryStore()
         let fm = FileManager.default
-        let lib = store.libraryFolder()
+        let lib = await store.libraryFolder()
         let file = lib.appendingPathComponent("work.txt")
         try "work".data(using: .utf8)!.write(to: file)
         defer {
@@ -36,8 +36,8 @@ struct ReaderCoreTests {
         }
 
         let work = Work(url: file, hash: "abcd", pageCount: 2)
-        store.save([work])
-        let loaded = store.load()
+        await store.save([work])
+        let loaded = await store.load()
         #expect(loaded.count == 1)
         #expect(loaded[0].url.lastPathComponent == "work.txt")
         #expect(loaded[0].hash == "abcd")
