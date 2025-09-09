@@ -35,7 +35,7 @@ struct ReaderCoreTests {
             try? fm.removeItem(at: lib.appendingPathComponent("_momiji_library.json"))
         }
 
-        let work = Work(url: file, hash: "abcd", pageCount: 2)
+        let work = await Work(url: file, hash: "abcd", pageCount: 2)
         await store.save([work])
         let loaded = await store.load()
         #expect(loaded.count == 1)

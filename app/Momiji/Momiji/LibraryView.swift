@@ -10,12 +10,13 @@ import UniformTypeIdentifiers
 import ZIPFoundation
 
 struct LibraryView: View {
-    @State private var works: [Work] = []
+    @State private var works: [Work] = []       // list of works
     @State private var showImporter = false
-    @State private var selectedWork: Work?
+    @State private var selectedWork: Work?      // current work
     @State private var selection: Work.ID?
 
     var body: some View {
+        
         // Precompute the selected work to simplify the NavigationSplitView's detail closure
         let currentSelection: Work? = selection.flatMap { id in
             works.first(where: { $0.id == id })
@@ -66,7 +67,8 @@ struct LibraryView: View {
     private func importURL(_ url: URL) async {
         do {
             // Security-scoped access just for the copy step
-            guard url.startAccessingSecurityScopedResource() else { throw CocoaError(.fileReadNoPermission) }
+            guard url.startAccessingSecurityScopedResource() else {
+                throw CocoaError(.fileReadNoPermission) }
             defer { url.stopAccessingSecurityScopedResource() }
 
             let local = try importIntoLibrary(url)
@@ -101,7 +103,8 @@ private func countPages(at url: URL) throws -> Int {
 }
 
 private func isImage(_ name: String) -> Bool {
-    [".jpg",".jpeg",".png",".webp",".bmp",".gif"].contains { name.lowercased().hasSuffix($0) }
+    if ( ["__MACOSX", ".", "._"].contains { name.hasPrefix($0)}) { return false }
+    return [".jpg",".jpeg",".png",".webp",".bmp",".gif"].contains { name.lowercased().hasSuffix($0) }
 }
 
 private struct WorkRow: View {

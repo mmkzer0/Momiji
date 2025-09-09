@@ -16,7 +16,8 @@ protocol ArchiveReader {
     func page(at index: Int) throws -> Data
 }
 
-private let supportedImageExtensions: Set<String> = ["jpg", "jpeg", "png", "webp", "bmp"]
+private let supportedImageExtensions: Set<String> = ["jpg", "jpeg", "png", "webp", "bmp", "gif"]
+private let metadataPrefixes: Set<String> = ["__MACOSX", ".", "._"]
 
 private func isSupportedImagePath(_ path: String) -> Bool {
     let ext = (path as NSString).pathExtension.lowercased()
@@ -66,11 +67,21 @@ final class ZipArchiveReader: ArchiveReader {
             }
         }
 
-        let exts = [".jpg",".jpeg",".png",".webp",".bmp",".gif"]
-        self.entries = archive
-            .compactMap { $0 }
-            .filter { $0.type == .file && $0.path.lowercased().hasSuffix(anyOf: exts) }
-            .sorted { $0.path.localizedStandardCompare($1.path) == .orderedAscending }
+        // Break up the pipeline to help the type checker
+        let filtered: [Entry] = archive.filter { entry in
+            guard entry.type == .file else { return false }
+            let path = entry.path
+            // Ignore metadata entries
+            if path.hasPrefix(anyOf: metadataPrefixes) {
+                return false
+            }
+            // Only include supported image files (case-insensitive)
+            return isSupportedImagePath(path)
+        }
+
+        self.entries = filtered.sorted {
+            $0.path.localizedStandardCompare($1.path) == .orderedAscending
+        }
 
         if entries.isEmpty {
             // Make emptiness explicit so we see it in the UI
@@ -94,7 +105,7 @@ struct FolderReader: ArchiveReader {
         let fm = FileManager.default
         let items = (try? fm.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)) ?? []
         self.files = items
-            .filter { ["jpg","jpeg","png","webp","bmp"].contains($0.pathExtension.lowercased()) }
+            .filter { supportedImageExtensions.contains($0.pathExtension.lowercased()) }
             .sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
     }
     var pageCount: Int { files.count }
@@ -136,5 +147,11 @@ func sha256(url: URL) throws -> String {
 }
 
 private extension String {
-    func hasSuffix(anyOf exts: [String]) -> Bool { exts.contains { self.hasSuffix($0) } }
+    func hasSuffix(anyOf exts: [String]) -> Bool {
+        exts.contains { self.hasSuffix($0) }
+    }
+
+    func hasPrefix<S: Sequence>(anyOf prefixes: S) -> Bool where S.Element == String {
+        prefixes.contains { self.hasPrefix($0) }
+    }
 }

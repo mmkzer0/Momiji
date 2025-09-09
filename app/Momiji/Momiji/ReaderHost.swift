@@ -16,7 +16,7 @@ struct ReaderHost: View {
     var body: some View {
         Group {
             if let r = reader {
-                ReaderView(reader: r, title: work.url.lastPathComponent)
+                ReaderView(reader: r, title: work.url.lastPathComponent, workID: work.id)
             } else if let e = error {
                 VStack(spacing: 10) {
                     Image(systemName: "exclamationmark.triangle").font(.largeTitle)
@@ -24,7 +24,14 @@ struct ReaderHost: View {
                     Text(e).font(.footnote).foregroundStyle(.secondary).multilineTextAlignment(.center)
                 }.padding()
             } else {
-                ProgressView().task(load)
+                ProgressView()      // shows until reader is ready or error thrown
+            }
+        }
+        .task(id: work.id) {
+            reader = nil
+            error = nil
+            do { reader = try ZipOrFolderReader(url: work.url) } catch {
+                self.error = error.localizedDescription
             }
         }
         .navigationTitle(work.url.lastPathComponent)
